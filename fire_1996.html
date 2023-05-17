@@ -1,0 +1,235 @@
+<html>
+<body>
+<main>
+  <aside>
+    <h1>PSX Doom fire effect</h1>
+    <p>Click fire to toggle heat.</p>
+    <p>As explained <a href="https://fabiensanglard.net/doom_fire_psx/index.html" target="_blank">in this article</a>.</p>
+  </aside>
+</main>
+<section>
+  <canvas width="256" height="150"></canvas>
+</section>
+</body>
+</html>
+
+
+
+<script>
+console.clear();
+
+// Fire gradient (black, red, orange, yellow, white)
+const COLORS = [
+  "#000000",
+  "#070707",
+  "#1F0707",
+  "#2F0F07",
+  "#470F07",
+  "#571707",
+  "#671F07",
+  "#771F07",
+  "#8F2707",
+  "#9F2F07",
+  "#AF3F0F",
+  "#BF470F",
+  "#C7470F",
+  "#DF4F0F",
+  "#DF5707",
+  "#DF5707",
+  "#D75F07",
+  "#D75F07",
+  "#D7670F",
+  "#CF6F0F",
+  "#CF770F",
+  "#CF7F0F",
+  "#CF8717",
+  "#C78717",
+  "#C78F17",
+  "#C7971F",
+  "#BF9F1F",
+  "#BF9F1F",
+  "#BFA727",
+  "#BFA727",
+  "#BFAF2F",
+  "#B7AF2F",
+  "#B7B72F",
+  "#B7B737",
+  "#CFCF6F",
+  "#DFDF9F",
+  "#EFEFC7",
+  "#FFFFFF"
+];
+
+// Convert the hex pal to a 0xAABBGGRR format
+const PAL = COLORS.map((hexColor) => {
+  const red = parseInt(hexColor.substr(1, 2), 16);
+  const green = parseInt(hexColor.substr(3, 2), 16);
+  const blue = parseInt(hexColor.substr(5, 2), 16);
+  const alpha = 0xff;
+  return (alpha << 24) | (blue << 16) | (green << 8) | red;
+});
+
+// Set up screen canvas
+const c = document.querySelector("canvas");
+const CW = c.width;
+const CH = c.height;
+const ctx = c.getContext("2d");
+
+// Config & toggle state
+const FPS = 35; // random PSX Doom-esque refresh rate *shrug*
+const HOT_AREA_BOT = CH - 1;
+const HOT_AREA_TOP = CH - 8;
+const MAX_HEAT = PAL.length - 1;
+let isOn = true;
+
+// Image data buffer for direct manipulation
+// (much more performant than fillStyle/drawRect calls!)
+const imageData = ctx.createImageData(CW, CH);
+const uint32Data = new Uint32Array(imageData.data.buffer);
+
+// Separate buffer to calculate propagated 'heat'
+const data = new Uint8ClampedArray(CW * CH);
+
+// Randomly increase the 'heat' of the last row of pixels.
+const setFire = () => {
+  const ly = HOT_AREA_BOT * CW;
+  for (let x = 0; x < CW; x++) {
+    const p = ly + x;
+    if (data[p] < MAX_HEAT) {
+      data[p] += Math.round(Math.random()) & 3;
+    }
+  }
+};
+
+// Randomly decrease the 'heat' of the last few rows.
+const stopFire = () => {
+  for (let y = HOT_AREA_TOP; y <= HOT_AREA_BOT; y++) {
+    for (let x = 0; x < CW; x++) {
+      const p = y * CW + x;
+      if (data[p] > 0) {
+        data[p] -= Math.round(Math.random()) & 3;
+      }
+    }
+  }
+};
+
+// Calculate the 'heat' levels of each pixel.
+// 'Heat' is a palette index.
+const update = () => {
+  if (isOn) {
+    setFire();
+  } else {
+    stopFire();
+  }
+  for (let x = 0; x < CW; x++) {
+    for (let y = 0; y < CH; y++) {
+      // Copy the current pixel's 'heat' to the
+      // pixel above it, reduced in heat slightly,
+      // and with some horizontal drift
+      const p = y * CW + x;
+      const r = Math.round(Math.random() * 3) & 3;
+      const t = p - CW - r + 1;
+      data[t] = data[p] - (r & 1);
+    }
+  }
+};
+
+// Draw the display.
+const render = () => {
+  // Use the calculated pixel values to fill
+  // the canvas with color data
+  for (let i = 0; i < uint32Data.length; i++) {
+    uint32Data[i] = PAL[data[i]];
+  }
+  ctx.putImageData(imageData, 0, 0);
+};
+
+// Vars for framerate
+let _pf = Date.now(),
+  _cf = 0;
+const ft = 1000 / FPS;
+let isRunning = true;
+
+// Called every time the screen refreshes
+// (determined by the browser).
+const loop = () => {
+  if (!isRunning) return;
+  requestAnimationFrame(loop);
+  _cf = Date.now();
+  // Update and render at a consistent framerate
+  if (_cf - _pf >= ft) {
+    try {
+      update();
+      render();
+      _pf = _cf;
+    } catch (e) {
+      isRunning = false;
+    }
+  }
+};
+
+// Toggle 'heat' at the bottom of the screen on click
+c.addEventListener("click", () => {
+  isOn = !isOn;
+});
+
+// Burn!
+loop();
+</script>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+canvas {
+  display: block;
+  width: auto;
+  max-height: 90vh;
+  height: 100%;
+  margin: 0 auto;
+  image-rendering: pixelated; // could be 'normal' for a CRT-style blur effect
+}
+
+main {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #889;
+
+  aside {
+    display: inline-block;
+    margin: 1em auto;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  a {
+    color: #a11;
+  }
+}
+
+</style>

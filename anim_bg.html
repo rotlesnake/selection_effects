@@ -1,0 +1,111 @@
+<html>
+<body>
+<svg id="hexagons">
+	<pattern id="hex" width="150" height="180" patternUnits="userSpaceOnUse" patternTransform="scale(0.5) skewY(-20) skewX(-40)">
+		<rect height="100%" width="100%" fill="#888" />
+		<g>
+			<g id="cube" fill="#222" opacity="1"  stroke-width="0.5">
+				<path id="h" d="M 57 82 l 66 38 v 76 l -66 -38 z" fill="#444" stroke="#444" />
+				<path id="h2" d="M 123 120 l 66 -38 v 76 l -66 38 z" fill="#666" stroke="#666" />
+				<path id="h3" d="M 123 120 l 66 -38 l -66 -38 l -66 38 z" fill="#888" stroke="#888" />
+			</g>
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="8s" begin="0s" repeatCount="indefinite" />
+		</g>
+		<use class="o" href="#cube" x="-150" y="0">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="8s" begin="0s" repeatCount="indefinite" />
+		</use>
+		<use class="cb" href="#cube" x="-75" y="-150">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="9s" begin="-3s" repeatCount="indefinite" />
+		</use>
+		<use class="rb" href="#cube" x="0" y="-90">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="7s" begin="0s" repeatCount="indefinite" />
+		</use>
+		<use class="rb" href="#cube" x="-150" y="-90">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="7s" begin="0s" repeatCount="indefinite" />
+		</use>
+		<use class="cb" href="#cube" x="75" y="45">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="9s" begin="-3s" repeatCount="indefinite" />
+		</use>
+		<use class="c" href="#cube" x="75" y="-45">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; 8 8; -8 8; 0 0" dur="8.3s" begin="0s" repeatCount="indefinite" />
+		</use>
+		<use class="cb" href="#cube" x="-75" y="45">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="9s" begin="-3s" repeatCount="indefinite" />
+		</use>
+		<use class="c" href="#cube" x="-75" y="-45">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; 8 8; -8 8; 0 0" dur="8.3s" begin="0s" repeatCount="indefinite" />
+		</use>
+		<use class="rb" href="#cube" x="0" y="90">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="7s" begin="0s" repeatCount="indefinite" />
+		</use>
+		<use class="rb" href="#cube" x="-150" y="90">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; -8 8; 8 8; 0 0" dur="7s" begin="0s" repeatCount="indefinite" />
+		</use>
+		<use class="c" href="#cube" x="-75" y="135">
+			<animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; 8 8; -8 8; 0 0" dur="8.3s" begin="0s" repeatCount="indefinite" />
+		</use>
+	</pattern>
+	<rect width="100%" height="100%" fill="url(#hex)" />
+</svg>
+</body>
+</html>
+
+
+
+<script>
+</script>
+
+
+<style>
+html {
+	--sz: 10px;	
+	--c1: #edf6fb;
+	--c2: #94afbd;
+	--c3: #46525e;
+	--c4: #2e353c;	
+	--ts: 50%/ calc(var(--sz) * 18.8) calc(var(--sz) * 10.8);
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	overflow: hidden;
+	background: 
+		/* I have repeated some sentences to avoid errors at the edges of the tiles */
+		conic-gradient(from 0deg at 65% 35%, var(--c3) 0 120deg, #fff0 0 100%) var(--ts),
+		conic-gradient(from 0deg at 65% 35%, var(--c3) 0 120deg, #fff0 0 100%) var(--ts),
+		
+		conic-gradient(from 240deg at 35% 35%, var(--c2) 0 120deg, #fff0 0 100%) var(--ts),
+		conic-gradient(from 240deg at 35% 35%, var(--c2) 0 120deg, #fff0 0 100%) var(--ts),
+
+		conic-gradient(from 60deg at 75% 65%, var(--c4) 0 60deg, #fff0 0 100%) var(--ts),
+		conic-gradient(from 60deg at 75% 65%, var(--c4) 0 60deg, #fff0 0 100%) var(--ts),
+		
+		conic-gradient(from 240deg at 25% 65%, var(--c4) 0 60deg, #fff0 0 100%) var(--ts),
+		conic-gradient(from 240deg at 25% 65%, var(--c4) 0 60deg, #fff0 0 100%) var(--ts),
+
+		conic-gradient(from 60deg at 65% 65%, var(--c1) 0 60deg, var(--c3) 0 120deg, #fff0 0 100%) var(--ts),
+		conic-gradient(from 60deg at 65% 65%, var(--c1) 0 60deg, var(--c3) 0 120deg, #fff0 0 100%) var(--ts),
+		
+		conic-gradient(from 180deg at 35% 65%, var(--c2) 0 60deg, var(--c1) 0 120deg, #fff0 0 100%) var(--ts),
+		conic-gradient(from 180deg at 35% 65%, var(--c2) 0 60deg, var(--c1) 0 120deg, #fff0 0 100%) var(--ts),
+
+		conic-gradient(from 60deg at 60% 10%, var(--c1) 0 60deg, #fff0 0 100%) var(--ts),
+		
+		conic-gradient(from -120deg at 40% 10%, var(--c1) 0 60deg, #fff0 0 100%) var(--ts),
+
+		conic-gradient(from -60deg at 50% 20%, var(--c3) 0 60deg, var(--c2) 0 120deg, #fff0 0 100%) var(--ts),
+		conic-gradient(from -60deg at 50% 20%, var(--c3) 0 60deg, var(--c2) 0 120deg, #fff0 0 100%) var(--ts),
+		
+		conic-gradient(from -60deg at 50% 40%, var(--c4) 0 120deg, #fff0 0 100%) var(--ts),
+
+		conic-gradient(from -60deg at 50% 50%, var(--c1) 0 120deg, var(--c2) 0 240deg, var(--c3) 0 100%) var(--ts),
+		conic-gradient(from -60deg at 50% 50%, var(--c1) 0 120deg, var(--c2) 0 240deg, var(--c3) 0 100%) var(--ts);
+}
+body {
+	margin: 0 auto;
+}
+svg {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+</style>

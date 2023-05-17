@@ -1,0 +1,255 @@
+<html>
+<body>
+<svg id="stars" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000"></svg>
+
+<label class="daynight">
+  <input type="range" min="0" max="100" value="80" id="daynight" class="daynight-input">
+  <span class="daynight-icons">
+    <svg viewBox="0 0 24 24">
+      <path d="M3 17h1m16 0h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7m-9.7 5.7a4 4 0 0 1 8 0"></path>
+      <path d="M3 21l18 0"></path>
+    </svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+      <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+      </svg>
+    <svg viewBox="0 0 24 24">		
+      <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z"></path>
+      <path d="M6.343 17.657l-1.414 1.414"></path>
+      <path d="M6.343 6.343l-1.414 -1.414"></path>
+      <path d="M17.657 6.343l1.414 -1.414"></path>
+      <path d="M17.657 17.657l1.414 1.414"></path>
+      <path d="M4 12h-2"></path>
+      <path d="M12 4v-2"></path>
+      <path d="M20 12h2"></path>
+      <path d="M12 20v2"></path>
+    </svg>
+      <svg viewBox="0 0 24 24">
+      <path d="M3 13h1"></path>
+      <path d="M20 13h1"></path>
+      <path d="M5.6 6.6l.7 .7"></path>
+      <path d="M18.4 6.6l-.7 .7"></path>
+      <path d="M8 13a4 4 0 1 1 8 0"></path>
+      <path d="M3 17h18"></path>
+      <path d="M7 20h5"></path>
+      <path d="M16 20h1"></path>
+      <path d="M12 5v-1"></path>
+    </svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+    </svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+      <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+      <path d="M19 11h2m-1 -1v2"></path>
+    </svg>
+  </span>
+</label>
+</body>
+</html>
+
+
+
+<script>
+const daynight = document.getElementById('daynight');
+daynight.addEventListener('input', () => {
+  let angle = 270 - ((270 / daynight.max) * (2*daynight.value));
+  let hue = 40 - ((40/daynight.max) * (2*daynight.value));
+  let light = daynight.value > 50 ? (100 - ((110/daynight.max) * daynight.value)) : 50;
+  if (angle < 0) angle = 0;
+  if (hue < 0) hue = 0;
+  if (light < 0) light = 0;
+  document.body.style.setProperty('--l', `${(((daynight.value - 0) * (60 - 40)) / (100 - 0) + 40)/100}`);
+  document.body.style.setProperty('--angle', `${angle}deg`);
+  document.body.style.setProperty('--hue1', `${hue}`);
+  document.body.style.setProperty('--light', `${light}%`);
+});
+
+/* Init */
+daynight.dispatchEvent(new Event('input'));
+
+function checkDistance(x1, y1, x2, y2){ 
+  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+}
+
+function coords(amount, w, h) {
+  return new Array(amount).fill().map(() => {
+    let x = Math.random() - 0.5;
+    let y = Math.random() - 0.5;
+    x = (x * 0.96875 + 0.5) * w;
+    y = (y * 0.96875 + 0.5) * h;
+    return [x, y]
+  })
+}
+
+function drawSVGParticles(svg, settings) {
+  let c = '', l = '';
+  let points = coords(settings.particles, settings.width, settings.height);
+  const length = points.length;
+  points = points.concat(settings.static);
+  points.forEach((coord, index) => {
+    const [x, y] = [...coord];
+    const static = index >= length;
+    l+= points.map(arr => {
+      const [x1, y1] = [...arr];
+      const distance = checkDistance(x, y, x1, y1);
+      const alpha = 1 - distance / settings.distance;
+      if (alpha > 0) return `<line x1="${x1}" y1="${y1}" x2="${x}" y2="${y}" ${static ? `data-static`:''} stroke="hsla(${settings.fill}, ${alpha})" stroke-width="${settings.strokeWidth}" />`}).join('');
+    c+= `<circle cx="${x}" cy="${y}" style="--animdel:${random(0,2000)}ms;--animdur:${random(2000,10000)}ms" ${static ? `data-static`:''} r="${static ? settings.staticRad : random(settings.minRad, settings.maxRad)}" fill="${static ? `hsl(${settings.staticFill})` : `hsl(${settings.fill})`}" />`;
+  });
+  svg.innerHTML = l + c;
+}
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+const settings = {
+  distance: 500,
+  fill: '41, 63%, 75%',
+  fitWidth: true,
+  height: document.body.offsetHeight,
+  maxRad: 9,
+  minRad: 2,
+  particles: 40,
+  static: [
+    [100, 100],
+    [500, 200],
+    [700, 150]
+  ],
+  staticFill: '41, 63%, 90%',
+  staticRad: 11,
+  stroke: '0, 0%, 0%',
+  strokeWidth: 0.5,
+  width: document.body.offsetWidth
+}
+
+const svg = document.getElementById('stars');
+svg.setAttribute('viewBox', `0 0 ${document.body.offsetWidth} ${document.body.offsetHeight}`)
+svg.width = document.body.offsetWidth;
+svg.height = document.body.offsetHeight;
+drawSVGParticles(svg, settings);
+</script>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+html {
+  height: -webkit-fill-available;
+}
+body {
+  --angle: 270deg;
+  --hue1: 40;
+  --hue2: 189;
+  --hue3: 330;
+  --hue4: 270;
+  --light: 50%;
+  --l: 0.40;
+  --r1: oklch(var(--l) 0.1 60 / 0.75);
+
+  background-image:
+    linear-gradient(var(--angle), hsl(var(--hue1), 100%, var(--light)), hsl(var(--hue2), 100%, var(--light)));
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow: hidden;
+  padding: 1ch;
+}
+body:before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+          mask-image: linear-gradient(to bottom, transparent, black);
+  background: linear-gradient(var(--angle), hsl(var(--hue3), 100%, calc(var(--light) + 20%)), hsl(var(--hue4), 50%, calc(var(--light) - 10%)));	
+}
+
+.daynight {
+  background-color: hsla(0, 0%, 0%, 0.15);
+  border: 2px solid var(--r1);
+  border-radius: 3em;
+  color: hsla(0, 0%, 100%, 0.8);
+  display: grid;
+  padding: .75em;
+  position: relative;
+  width: 100%;
+}
+.daynight-icons {
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+.daynight-icons svg {
+  fill: none;
+  height: 2em;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.25;
+  stroke: currentColor;
+  width: 2em;
+}
+.daynight-input {
+  appearance: none;
+  background: transparent;
+  inset: 0;
+  position: absolute;
+}
+.daynight-input::-webkit-slider-runnable-track {
+  height: 100%;
+  width: 100%;
+}
+.daynight-input::-webkit-slider-thumb {
+  appearance: none;
+  aspect-ratio: 1 / 1;
+  background: var(--r1);
+  border-radius: 100%;
+  height: 100%;
+}
+
+/* -moz-stuff */
+@-moz-document url-prefix() { 
+  .daynight-input {
+     height: 100%;
+     width: 100%;
+  }
+}
+.daynight-input::-moz-range-track {
+  border-radius: 3em;
+  height: 100%;
+  width: 100%;
+}
+.daynight-input::-moz-range-thumb {
+  appearance: none;
+  aspect-ratio: 1 / 1;
+  background: hsl(27.86deg 46.88% 45.84% / 75%);
+  border-radius: 100%;
+  height: 48px;
+  width: 48px;
+}
+
+/* Stars */
+#stars {
+  inset: 60px 0 0 0;
+  opacity: calc(50% - var(--light));
+  position: fixed;
+  z-index: -1;
+}
+
+#stars circle {
+  animation: fade var(--animdur) linear infinite;
+}
+
+#stars line {
+  opacity: 0.1;
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 0.25 }
+  50% { opacity: 1 }
+}
+</style>
