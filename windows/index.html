@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - windows 10 20h1 explorer</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="desktop">
+  <div class="start-menu-fade"></div>
+  <div class="start-menu acrylic">
+    <div class="start-menu__list">
+      <div class="media">
+        <a class="user-info menu-toggle" href="#" data-menu="user">
+        <img class="user-info__img media__img" data-tilt id="profile-avatar">
+        </a>
+        <div id="hello"></div>
+      </div>
+      
+
+      <ul class="start-menu__recent">
+        <li class="start-menu__explorer">
+          <a href="#" data-window="explorer">
+            <i class="fa fa-folder"></i>
+            File Explorer
+          </a>
+        </li>
+        <li class="start-menu__mail">
+          <a href="#" data-window="mail">
+            <i class="fa fa-envelope"></i>
+            Mail
+          </a>
+        </li>
+        <li class="start-menu__notepad">
+          <a href="#" data-window="notepad">
+            <i class="fa fa-pencil"></i>
+            Notepad
+          </a>
+        </li>
+        <li class="start-menu__explorer">
+          <a href="#">
+            <i class="fa fa-folder"></i>
+            File Explorer
+          </a>
+        </li>
+        <li class="start-menu__mail">
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            Mail
+          </a>
+        </li>
+        <li class="start-menu__notepad">
+          <a href="#">
+            <i class="fa fa-pencil"></i>
+            Notepad
+          </a>
+        </li>
+      </ul>
+      
+      <a class="all-apps" href="#">
+        All apps
+        <i class="fa fa-arrow-right"></i>
+      </a>
+      <form class="search">
+      <input type="text" class="search__input" placeholder="Ask me anything">
+      <button class="search__btn">
+        </button>
+      </form>
+    </div>
+    <div class="start-screen-scroll">
+    <div class="start-screen">
+      <a class="start-screen__tile start-screen__tile--explorer masonry-item" href="#" data-window="explorer">
+        <i class="fa fa-folder"></i>
+        <span>File Explorer</span>
+      </a>
+      <a class="start-screen__tile masonry-item" href="#">
+      </a>
+      <a class="start-screen__tile start-screen__tile--wide masonry-item" href="#"  data-ss-colspan="2">
+      </a>
+      <div class="start-screen__smallgroup masonry-item">
+      <a class="start-screen__tile start-screen__tile--small" href="#"></a>
+        <a class="start-screen__tile start-screen__tile--small" href="#"></a>
+        <a class="start-screen__tile start-screen__tile--small" href="#"></a>
+      </div>
+      <a class="start-screen__tile masonry-item" href="#">
+      </a>
+      <a class="start-screen__tile masonry-item" href="#">
+      </a>
+      <a class="start-screen__tile start-screen__tile--notepad masonry-item" href="#">
+      </a>
+      <a class="start-screen__tile start-screen__tile--large start-screen__tile--mail masonry-item" href="#" data-ss-colspan="2">
+        <i class="fa fa-envelope"></i>
+        <span>Mail</span>
+      </a>
+      <a class="start-screen__tile masonry-item" href="#">
+      </a>
+      <a class="start-screen__tile masonry-item" href="#">
+      </a>
+      <a class="start-screen__tile masonry-item" href="#">
+      </a>
+    </div>
+    </div>
+  </div>
+  
+  <div class="taskbar acrylic">
+    <a class="taskbar__item taskbar__item--start" href="#" data-window="start">
+      <i class="fa fa-windows"></i>
+    </a>
+    <a class="taskbar__item taskbar__item--settings" href="#" data-window="settings">
+	   <i class="fa fa-sliders"></i>
+    </a>
+    <a class="taskbar__item taskbar__item--explorer" href="#" data-window="explorer">
+      <i class="fa fa-folder"></i>
+    </a>
+    <a class="taskbar__item taskbar__item--mail" href="#" data-window="mail">
+      <i class="fa fa-envelope"></i>
+    </a>
+    <a class="taskbar__item taskbar__item--notepad" href="#" data-window="notepad">
+      <i class="fa fa-pencil"></i>
+    </a>
+    
+    <div class="taskbar__tray">
+      <span class="time">
+        <script>
+          
+         </script>
+      </span>
+    </div>
+  </div>
+  
+<div class="window window--explorer window--minimized" data-window="explorer" style="width:670px;height:400px;top:5%;left:10%;">
+    <div class="window__titlebar">
+      <div class="window__controls window__controls--left">
+        <a class="window__icon" href="#"><i class="fa fa-folder"></i></a>
+        <a class="window__dossier" href="#"><i class="fa fa-desktop"></i> Bureau</a>
+        <a class="window__close1" href="#"><i class="fa fa-close"></i></a>
+        <a class="window--menutoggle" href="#"><i class="fa fa-plus"></i></a>
+      </div>
+      <span class="window__title">
+        Explorateur
+      </span>
+      
+      <div class="window__controls window__controls--right">
+        <a class="window__minimize" href="#"><i class="fa fa-minus"></i></a>
+        <a class="window__maximize" href="#"><i class="fa"></i></a>
+        <a class="window__close" href="#"><i class="fa fa-close"></i></a>
+      </div>
+    </div>
+    
+    <ul class="window__menu">
+        <li>
+          <a href="#">
+            <i class="menu__icon fa fa-search"></i>
+            Search
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="menu__icon fa fa-share-alt"></i>
+            Share
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="menu__icon fa fa-plug"></i>
+            Devices
+          </a>
+        </li>
+        <li class="divided">
+          <a href="#">
+            <i class="menu__icon fa fa-cog"></i>
+            Settings
+          </a>
+        </li>
+      </ul>
+    
+    <div class="window__actions">
+      <a class="window__back" href="#">
+        <i class="fa fa-arrow-left"></i>
+      </a>
+      <a class="window__forward" href="#">
+        <i class="fa fa-arrow-right"></i>
+      </a>
+      <!--<div class="window__path">
+        <a href="#">
+        <i class="fa fa-desktop"></i>
+          Bureau
+        </a>
+      </div>-->
+      <form class="search">
+        <input type="text" class="search__input" placeholder="Search">
+        <button class="search__btn">
+        </button>
+      </form>
+    </div>
+    
+    <div class="window__body">
+      
+      <div class="window__side">
+        
+        <ul class="side__list">
+          <li><a href="#">Home</a></li>
+          <li>
+            <a href="#">Favorites</a>
+            <ul>
+              <li><a href="#">Desktop</a></li>
+              <li><a href="#">Downloads</a></li>
+              <li><a href="#">Recent Places</a></li>
+          </ul>
+        </li>
+          <li>
+            <a href="#">This Device</a>
+            <ul style="display:none">
+              <li><a href="#">Desktop</a>
+                <ul style="display:none">
+                  <li>
+                    <a href="#">Folder 1</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="#">Documents</a></li>
+              <li><a href="#">Downloads</a></li>
+              <li><a href="#">Local Disk  (C:)</a></li>
+        </ul>
+      </div>
+      <div class="window__main">
+        <div class="folders">
+          <a href="#">
+            <i class="fa fa-folder"></i>
+            <span>Folder 1</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-folder"></i>
+            <span>Folder 2</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-folder"></i>
+            <span>Folder 3</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-file"></i>
+            <span>File</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fenetre reglages -->
+    <div class="window window--settings" data-window="settings" style="display:none;width:800px;height:500px;top:0;left:30%;">
+    <div class="window__titlebar">
+      <div class="window__controls window__controls--left">
+        <a class="window__icon" href="#"><i class="fa fa-sliders"></i></a>
+      </div>
+      
+      
+      
+      <span class="window__title">
+        Réglages
+      </span>
+      
+      <div class="window__controls window__controls--right">
+        <a class="window__minimize" href="#"><i class="fa fa-minus"></i></a>
+        <a class="window__maximize" href="#"><i class="fa"></i></a>
+        <a class="window__close" href="#"><i class="fa fa-close"></i></a>
+      </div>
+    </div>    
+    <div class="window__body">
+	         <div class="window__main">
+          <ul id="background">
+          <p>Choisir votre image</p>
+          <li class="imgpreview"><img src="https://papers.co/wallpaper/papers.co-nm68-lawn-green-nature-sunset-light-bokeh-spring-flare-happy-36-3840x2400-4k-wallpaper.jpg"></li>
+          <li class="imgpreview"><img src="https://i.pinimg.com/originals/a1/4d/e0/a14de021c4fa8049d2d798d5b98d7419.jpg"></li>
+          <li class="imgpreview"><img src="http://getwallpapers.com/wallpaper/full/a/e/d/90194.jpg"></li>
+          <li class="imgpreview"><img src="https://img08.deviantart.net/a2ff/i/2015/084/a/d/tumblr_nature_backgrounds_by_whisspered-d8n5bz2.jpg"></li>
+          <li class="imgpreview"><img src="https://3.bp.blogspot.com/-4rGNHIFSsq0/VKuHm4RzJzI/AAAAAAAAAsU/Y30GmDtLPfE/s1600/tumblr_mah7zaP36t1rdvzeho1_1280.jpg"></li>
+          <li class="imgpreview"><img src="https://wallpaperplay.com/walls/full/d/d/a/92999.jpg"></li>
+            <input type="file" id="uploader" />
+          <label for="uploader">Parcourir</label>
+          </ul>
+          <ul>
+	          <li>
+		      <p>Changer d'avatar</p>
+	          </li>
+	          <li>
+           <input type="file" id="uploader" />
+          <label class="parcourir" for="uploader">Parcourir</label>
+	          </li>
+	          <li>
+                  <p>Changer de nom</p>
+              </li>
+              <li>
+		  <input type="text" name="userid" id="user" placeholder="ton nom"/>
+          <button type="button" class="fa fa-arrow-right" value="Login" for="user" id="my_button"/>
+	          </li>
+          </ul>
+          <ul>
+	          <li>
+	          <p>activer le mode sombre</p>
+	          <div class="theme-switch-wrapper">
+		          <label class="theme-switch" for="checkbox">
+		            <input type="checkbox" id="checkbox" class="switch-input" />
+		            <div class="slider round"></div>
+		            <span class="switch-label" data-on="On" data-off="Off"></span>
+		          </label>
+		      </div>
+	          </li>
+	       </ul>
+      </div>
+    </div>
+
+  </div></div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+<script src='https://cdn.rawgit.com/desandro/masonry/master/dist/masonry.pkgd.min.js'></script>
+<script src='https://css-tricks.com/examples/DragAvatar/resample.js'></script>
+<script src='https://css-tricks.com/examples/DragAvatar/avatar.js'></script>
+<script src='https://unpkg.com/tilt.js@1.1.21/dest/tilt.jquery.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
