@@ -204,6 +204,7 @@ DigitalRain.prototype.setSize = function () {
   // Set the font size and get the rows/columns
   self.fontSize = Math.ceil(typeof self.size === 'function' ? self.size() : self.size)
   self.columns = Math.ceil(self.canvas.width / self.fontSize)
+console.log(self.fontSize)
   // self.columns = 1
   self.rows = Math.ceil(self.canvas.height / self.fontSize)
   self.characters = self.rows * self.columns
@@ -211,7 +212,10 @@ DigitalRain.prototype.setSize = function () {
   self.context.textAlign = 'center'
 }
 
-window.myDigitalRain = new DigitalRain(CANVAS, DEFAULT_OPTIONS)
+window.myDigitalRain = new DigitalRain(CANVAS, DEFAULT_OPTIONS);
+setTimeout(()=>{
+window.myDigitalRain.reset.call(window.myDigitalRain);
+},0);
 </script>
 
 

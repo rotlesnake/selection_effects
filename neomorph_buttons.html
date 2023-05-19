@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neomorphic icons</title>
+
+      <!-- font awesome cdn link  -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+      <link rel="stylesheet" href="icons.css">
+</head>
+<body>
+    
+<ul>
+    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+</ul>
+
+</body>
+</html>
+
+
+<script>
+</script>
+
+
+<style>
+body{
+    margin: 0;
+    padding: 0;
+    background: #dedede;
+}
+
+ul{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul li{
+    list-style: none;
+}
+
+ul li a{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: block;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 50%;
+    padding: 6px;
+    box-sizing: border-box;
+    text-decoration: none;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(0deg, #ddd, #fff);
+    transition: .5s;
+}
+
+ul li a:hover{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+ul li a .fab{
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(0deg, #fff, #ddd);
+    border-radius: 50%;
+    line-height: calc(60px - 12px);
+    font-size: 24px;
+    color: #262626;
+    transition: .5s;
+}
+
+ul li a .fa-facebook:hover{
+    color: rgb(69, 69, 189);
+}
+ul li a .fa-twitter:hover{
+    color: skyblue;
+}
+ul li a .fa-google-plus-g:hover{
+    color: rgb(218, 71, 71);
+}
+ul li a .fa-instagram:hover{
+    color: rgb(220, 163, 173);
+}
+</style>
