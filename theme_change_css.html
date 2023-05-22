@@ -1,0 +1,125 @@
+<html>
+<body>
+<main class="container">
+  <h1>Select a color theme from the dropdown</h1>
+  <select name="theme-select" id="theme-select">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+    <option value="blue">Blue</option>
+    <option value="pink">Pink</option>
+    <option value="space">Space</option>
+    <option value="nyan">Nyan</option>
+  </select>
+</main>
+
+<footer>
+  <p>
+    Pen by <a href="https://www.jemimaabu.com" target="_blank">Jemima Abu</a><span style="color: #D11E15"> &#9829;</span>
+  </p>
+</footer>
+</div>
+</body>
+</html>
+
+
+
+<script>
+const setTheme = theme => document.documentElement.className = theme;
+
+document.getElementById('theme-select').addEventListener('change', function() {
+  setTheme(this.value);
+});
+</script>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root,
+:root.light {
+  --bg-color: #fff;
+  --text-color: #123;
+}
+
+:root.dark {
+  --bg-color: #121212;
+  --text-color: #696d7d;
+}
+
+:root.blue {
+  --bg-color: #05396B;
+  --text-color: #E7F1FE;
+}
+
+:root.pink {
+  --bg-color: #ffcad4;
+  --text-color: #e75480;
+}
+
+:root.space {
+  --bg-color: #000;
+  --text-color: #f2bd16;
+  --bg-url: url("https://www.spacejam.com/1996/img/bg_stars.gif");
+  --font-family: 'Press Start 2P', cursive;
+}
+
+:root.nyan {
+  --bg-color: #013367;
+  --text-color: #fff;
+  --bg-url: url("https://static.wixstatic.com/media/4cbe8d_f1ed2800a49649848102c68fc5a66e53~mv2.gif");
+  --font-family: 'Comic Neue', cursive;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  background-image: var(--bg-url);
+  color: var(--text-color);
+  font-family: var(--font-family, "Inter", sans-serif);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 0;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  font-weight: normal;
+}
+
+select {
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  font-family: inherit;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 0.25rem;
+}
+
+footer {
+  text-align: center;
+  padding: 0.5rem 0;
+  background-color: #eaeaea90;
+}
+
+footer p {
+  font-size: 0.75rem;
+  margin: 0.25rem 0;
+  color: #221133;
+}
+
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+</style>
