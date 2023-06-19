@@ -1,0 +1,19 @@
+.container
+  input#switch-on(type='radio' name='switch' checked)
+  input#switch-off(type='radio' name='switch')
+  .switch
+    label(for='switch-on')
+    label(for='switch-off')
+    .pin-wrapper
+      .pin.pin-on
+        .pin-corners
+          - var n = 0;
+          while n <= 12
+           span= n++
+        .pin-center
+      .pin.pin-off
+        .pin-corners
+          - var n = 0;
+          while n <= 12
+           span= n++
+        .pin-center
