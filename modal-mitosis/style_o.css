@@ -50,7 +50,7 @@ body {
   color: #FFF;
   font-size: 3vmin;
   display: grid;
-  grid-gap: 6vmin;
+  grid-gap: 16vmin;
   grid-template-rows: 2fr 1fr;
   grid-template-columns: 1fr;
 }
@@ -72,7 +72,7 @@ body {
 
 .drip {
   position: absolute;
-  height: 16vmin;
+  height: 10vmin;
   width: 16vmin;
   background: var(--color-primary);
   border-radius: 10vmin;
