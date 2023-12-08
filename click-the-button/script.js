@@ -6,13 +6,6 @@ const { useState, useRef, useEffect, useLayoutEffect, createContext } = React;
 
 const CONSTANTS = {
   assetPath: "./img" };
-/*
-https://s3-us-west-2.amazonaws.com/s.cdpn.io/184729/head.svg
-https://s3-us-west-2.amazonaws.com/s.cdpn.io/184729/hand.svg
-https://s3-us-west-2.amazonaws.com/s.cdpn.io/184729/hand-waiting.svg
-https://s3-us-west-2.amazonaws.com/s.cdpn.io/184729/hand-with-cursor.svg
-https://s3-us-west-2.amazonaws.com/s.cdpn.io/184729/hand-surfs-up.svg
-*/
 
 
 const ASSETS = {
@@ -35,7 +28,6 @@ Object.keys(ASSETS).forEach(key => {
  * Shared hooks
  */
 
-// Hover state - https://dev.to/spaciecat/hover-states-with-react-hooks-4023
 const useHover = () => {
   const ref = useRef();
   const [hovered, setHovered] = useState(false);

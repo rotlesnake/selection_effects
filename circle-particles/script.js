@@ -6,22 +6,13 @@ gsap.registerPlugin(MotionPathPlugin);
 class PackedParticles
 {
 
+  constructor(element, width, height, count = 100) {
+    _defineProperty(this, "particleImages", [{ name: 'particle_dot', url: './circle.png' }, { name: 'particle_hex', url: './hexagon.png' }, 
+                                             { name: 'particle_ring', url: './ringData.png' }, { name: 'particle_hex_ring', url: './hexData.png' }, 
+                                             { name: 'particle_star', url: './star.png' }]);
+    _defineProperty(this, "shapeImages", [{ name: 'shape_G', url: './Group%20139.png' }, { name: 'shape_S', url: './Group%20140.png' }, 
+                                          { name: 'shape_A', url: './Group%20141.png' }, { name: 'shape_P', url: './Group%20142.png' }, { name: 'shape_3', url: './Group%20143.png' }]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  constructor(element, width, height, count = 100)
-  {_defineProperty(this, "particleImages", [{ name: 'particle_dot', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/circle.png' }, { name: 'particle_hex', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/hexagon.png' }, { name: 'particle_ring', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/ringData.png' }, { name: 'particle_hex_ring', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/hexData.png' }, { name: 'particle_star', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/star.png' }]);_defineProperty(this, "shapeImages", [{ name: 'shape_G', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/Group%20139.png' }, { name: 'shape_S', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/Group%20140.png' }, { name: 'shape_A', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/Group%20141.png' }, { name: 'shape_P', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/Group%20142.png' }, { name: 'shape_3', url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557388/Group%20143.png' }]);
     this.colors = {
       background: Utils.hexToNumber(Utils.getVar('--background')) };
 
